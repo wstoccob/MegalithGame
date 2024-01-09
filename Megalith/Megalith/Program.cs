@@ -1,2 +1,2 @@
-﻿using var game = new Megalith.Game1();
+﻿using var game = new Megalith.MainGame();
 game.Run();

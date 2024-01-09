@@ -4,22 +4,31 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Megalith;
 
-public class Game1 : Game
+public class MainGame : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    public Game1()
+    private int _designedResolutionWidth;
+    private int _designedResolutionHeight;
+    private float _designedResolutionAspectRatio;
+
+    public MainGame()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
+        _graphics.PreferredBackBufferWidth = _designedResolutionWidth;
+        _graphics.PreferredBackBufferHeight = _designedResolutionHeight;
+        _graphics.IsFullScreen = false;
+        _graphics.ApplyChanges();
+        
+        
         base.Initialize();
     }
 
