@@ -9,7 +9,7 @@ public class MainGame : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    
+     
     private Sprite _sprite;
 
     public MainGame()
