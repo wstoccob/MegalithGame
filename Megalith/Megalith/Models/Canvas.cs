@@ -20,8 +20,8 @@ public class Canvas
     {
         var screenSize = _graphicsDevice.PresentationParameters.Bounds;
 
-        float scaleX = (float)screenSize.X / _target.Width;
-        float scaleY = (float)screenSize.Y / _target.Height;
+        float scaleX = (float)screenSize.Width / _target.Width;
+        float scaleY = (float)screenSize.Height / _target.Height;
         float scale = Math.Min(scaleX, scaleY);
 
         int newWidth = (int) (_target.Width * scale);

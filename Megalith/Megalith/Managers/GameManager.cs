@@ -20,6 +20,16 @@ public class GameManager
         _sprite = new(_game.Content.Load<Texture2D>("screen"), new Vector2(0, 0));
         SetResolution(400, 300);
     }
+
+    private void SetFullscreen()
+    {
+        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        _game.Window.IsBorderless = true;
+        _graphics.ApplyChanges();
+        _canvas.SetDestinationRectangle();
+
+    }
     
     private void SetResolution(int width, int height)
     {
@@ -34,9 +44,9 @@ public class GameManager
     {
         InputManager.Update();
         if (InputManager.IsKeyPressed(Keys.F1)) SetResolution(400, 300);
-        if (InputManager.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
+        if (InputManager.IsKeyPressed(Keys.F2)) SetResolution(1920, 500);
         if (InputManager.IsKeyPressed(Keys.F3)) SetResolution(640, 1080);
-        // if (InputManager.IsKeyPressed(Keys.F4)) ;
+        if (InputManager.IsKeyPressed(Keys.F4)) SetFullscreen();
     }
 
     public void Draw(SpriteBatch spriteBatch)
