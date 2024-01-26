@@ -1,4 +1,5 @@
-﻿using Megalith.Models;
+﻿using Megalith.Managers;
+using Megalith.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,10 +8,9 @@ namespace Megalith;
 
 public class MainGame : Game
 {
+    private GameManager _gameManager;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-     
-    private Sprite _sprite;
 
     public MainGame()
     {
@@ -21,22 +21,17 @@ public class MainGame : Game
     }
     protected override void Initialize()
     {
-        _graphics.IsFullScreen = false;
+        _graphics.PreferredBackBufferWidth = 400;
+        _graphics.PreferredBackBufferHeight = 300;
         _graphics.ApplyChanges();
-        
-        _sprite = new Sprite(this.Content.Load<Texture2D>("screen"), new Vector2(0, 0));
-        
-        
+
+        _gameManager = new GameManager(this, _graphics);
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        
-
-        // TODO: use this.Content to load your game content here
     }
 
     protected override void Update(GameTime gameTime)
@@ -44,22 +39,14 @@ public class MainGame : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        // TODO: Add your update logic here
-
+        
+        _gameManager.Update();
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-        
-        _spriteBatch.Begin();
-        _sprite.Draw(_spriteBatch);
-        _spriteBatch.End();
-        
-        // TODO: Add your drawing code here
-
+        _gameManager.Draw(_spriteBatch);
         base.Draw(gameTime);
     }
 }
