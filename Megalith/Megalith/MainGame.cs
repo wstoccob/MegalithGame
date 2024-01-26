@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Megalith.Models;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,10 +9,8 @@ public class MainGame : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
-    private int _designedResolutionWidth;
-    private int _designedResolutionHeight;
-    private float _designedResolutionAspectRatio;
+    
+    private Sprite _sprite;
 
     public MainGame()
     {
@@ -20,13 +19,12 @@ public class MainGame : Game
         IsMouseVisible = true;
         
     }
-
     protected override void Initialize()
     {
-        _graphics.PreferredBackBufferWidth = _designedResolutionWidth;
-        _graphics.PreferredBackBufferHeight = _designedResolutionHeight;
         _graphics.IsFullScreen = false;
         _graphics.ApplyChanges();
+        
+        _sprite = new Sprite(this.Content.Load<Texture2D>("screen"), new Vector2(0, 0));
         
         
         base.Initialize();
@@ -35,6 +33,8 @@ public class MainGame : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        
 
         // TODO: use this.Content to load your game content here
     }
@@ -53,7 +53,11 @@ public class MainGame : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-
+        
+        _spriteBatch.Begin();
+        _sprite.Draw(_spriteBatch);
+        _spriteBatch.End();
+        
         // TODO: Add your drawing code here
 
         base.Draw(gameTime);

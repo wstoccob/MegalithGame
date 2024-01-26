@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace Megalith;
+namespace Megalith.Managers;
 
 public static class InputManager
 {
